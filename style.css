@@ -7,7 +7,8 @@
 :root {
   /* background color */
   --primary-bg-color: #333;
-  --secondary-bg-color: #444;
+  --secondary-bg-color: #595757;
+  --hover-bg-color: #555;
   /* text color */
   --primary-text-color: #fff;
   --secondary-text-color: #ccc;
@@ -20,7 +21,9 @@
 }
 body,
 html {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif, Arial,
+    sans-serif;
   background-color: #333;
   color: #fff;
   line-height: 1.6;
@@ -31,12 +34,68 @@ main {
   display: flex;
   flex-direction: column;
 }
-nav{
+nav {
+  font-size: 1.2rem;
   display: flex;
   justify-content: space-between;
-  padding: var(--spacing-m) var(--spacing-m);
+  padding: var(--spacing-m) var(--spacing-l);
   margin: var(--spacing-m);
-
+}
+.btn {
+  font-size: 1.7 rem;
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-text-color);
+  padding: var(--spacing-m) var(--spacing-l);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--hover-bg-color);
+}
+.btn:active {
+  transform: scale(0.9);
 }
 
-section{}
+section {
+  padding: var(--spacing-l);
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+section .task-col {
+  background-color: var(--secondary-bg-color);
+  padding: var(--spacing-m);
+  border-radius: 8px;
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+}
+section .task-col .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-m);
+}
+section .task-col .task-list .task{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-s);
+  padding: var(--spacing-m);
+  border: 2px solid var(--secondary-text-color);
+  border-radius: 8px;
+}
+.delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: var(--spacing-m);
+}
+.delete-btn:hover {
+  background-color: #f13737;
+}
