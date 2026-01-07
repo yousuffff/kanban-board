@@ -8,7 +8,7 @@
   /* background color */
   --primary-bg-color: #333;
   --secondary-bg-color: #595757;
-  --hover-bg-color: #555;
+  --hover-bg-color: #4f4a4a;
   /* text color */
   --primary-text-color: #fff;
   --secondary-text-color: #ccc;
@@ -78,13 +78,15 @@ section .task-col .top {
   align-items: center;
   margin-bottom: var(--spacing-m);
 }
-section .task-col .task-list .task{
+section .task-col .task-list .task {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--spacing-s);
   padding: var(--spacing-m);
   border: 2px solid var(--secondary-text-color);
   border-radius: 8px;
+  background-color: var(--hover-bg-color);
+  cursor: grab;
 }
 .delete-btn {
   background-color: #ff4d4d;
