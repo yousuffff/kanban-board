@@ -94,7 +94,7 @@ section .task-col .top {
   border-radius: 50%;
   font-weight: bold;
 }
-section .task-col .task-list .task {
+section .task-col .task {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--spacing-s);
