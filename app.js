@@ -1,6 +1,10 @@
 const coloumns = document.querySelectorAll(".task-col");
+const todoColoumn = document.getElementById("todo");
 // console.log(coloumns);
-
+const sumbitBtn = document.getElementById("submit");
+const modal = document.querySelector(".modal");
+const bgModal = document.querySelector(".bg");
+const addTaskBtn = document.querySelector(".btn-addTask");
 const tasks = document.querySelectorAll(".task");
 // console.log(tasks);
 
@@ -30,3 +34,40 @@ coloumns.forEach((coloumn) => {
     coloumn.classList.remove("hover");
   });
 });
+
+addTaskBtn.addEventListener("click", () => {
+  modal.classList.toggle("active");
+})
+
+sumbitBtn.addEventListener("click", () => {
+  const title = document.getElementById("task-title").value;
+  const des = document.getElementById("title-des").value;
+
+  if (title && des) {
+    const taskDiv = document.createElement("div");
+    taskDiv.classList.add("task");
+    taskDiv.setAttribute("draggable", "true");
+    taskDiv.innerHTML = 
+    `<h3>${title}</h3>
+    <p>${des}</p>
+    <button class="delete-btn">Delete</button>`;
+
+
+    taskDiv.addEventListener("drag", (e) => {
+      e.preventDefault();
+      dragElement = taskDiv;
+    })
+    todoColoumn.appendChild(taskDiv);   
+    
+    modal.style.display = "none";
+    document.getElementById("task-title").value = "";
+    document.getElementById("title-des").value = "";
+}else if(!title || !des){
+    
+  }
+})
+bgModal.addEventListener("click", () => {
+  modal.classList.remove("active");
+})
+
+
