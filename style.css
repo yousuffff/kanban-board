@@ -104,6 +104,13 @@ section .task-col .task {
   background-color: var(--hover-bg-color);
   cursor: grab;
 }
+section .task-col .task p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+}
+
 .delete-btn {
   background-color: #ff4d4d;
   color: #fff;

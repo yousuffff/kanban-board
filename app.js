@@ -12,7 +12,8 @@ const tasks = document.querySelectorAll(".task");
 let dragElement = null;
 
 document.addEventListener("dragstart", (e) => {
-  if (e.target.classList.contains("task")) dragElement = e.target;
+  if (!e.target.classList.contains("task")) return
+    dragElement = e.target;
   e.target.classList.add("dragging");
 });
 document.addEventListener("dragend", (e) => {
@@ -38,7 +39,7 @@ coloumns.forEach((coloumn) => {
 function updateTaskCount() {
   coloumns.forEach((col) => {
     const taskLength = col.querySelectorAll(".task").length;
-    console.log(taskLength);
+    // console.log(taskLength);
     const count = col.querySelector(".task-count");
     if (count) count.textContent = taskLength;
     return;
@@ -72,9 +73,10 @@ sumbitBtn.addEventListener("click", () => {
   document.getElementById("title-des").value = "";
   updateTaskCount();
 });
+
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-btn")) {
-    const task = e.target.closest("task");
+    const task = e.target.closest(".task");
     task.remove();
   }
   updateTaskCount();
