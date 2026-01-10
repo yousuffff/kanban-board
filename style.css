@@ -74,11 +74,12 @@ section .task-col {
   width: 32%;
   display: flex;
   flex-direction: column;
+  transition: 0.7s all ease;
 }
 
 section .task-col.hover {
   border: 2px dotted var(--primary-text-color);
-  transition: 0.7 ease all;
+
   transform: scale(1.04);
 }
 section .task-col .top {
