@@ -159,12 +159,12 @@ section .task-col .task {
   border-radius: 4px;
   font-size: 1rem;
 }
-.modal .modal-addTask textarea{
+.modal .modal-addTask textarea {
   flex: 1;
   resize: none;
 }
 .modal .modal-addTask .submit {
-  align-self:center;
+  align-self: center;
   width: 50%;
   background-color: var(--primary-text-color);
   color: var(--secondary-bg-color);
@@ -180,4 +180,14 @@ section .task-col .task {
 }
 .modal .modal-addTask .submit:active {
   transform: scale(0.95);
+}
+
+/* While dragging */
+.task.dragging {
+  opacity: 0.6;
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  cursor: grabbing;
+  position: relative;
+  z-index: 1000;
 }
