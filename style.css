@@ -198,4 +198,5 @@ section .task-col .task p {
   cursor: grabbing;
   position: relative;
   z-index: 1000;
+  
 }

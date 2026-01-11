@@ -8,12 +8,70 @@ const bgModal = document.querySelector(".bg");
 const addTaskBtn = document.querySelector(".btn-addTask");
 const tasks = document.querySelectorAll(".task");
 // console.log(tasks);
-
+let savedTask = {};
 let dragElement = null;
 
+// Load saved tasks from localStorage
+function loadTasks() {
+  savedTask = JSON.parse(localStorage.getItem("tasks")) || {};
+
+  Object.keys(savedTask).forEach((columnId) => {
+    const column = document.getElementById(columnId);
+
+    savedTask[columnId].forEach((task) => {
+      addTask(task.title, task.des, column);
+    });
+  });
+
+  updateTaskCount();
+}
+loadTasks();
+
+// Save task to localStorage
+function saveAllTasks() {
+  savedTask = {};
+
+  coloumns.forEach((col) => {
+    const columnId = col.id;
+    const tasks = col.querySelectorAll(".task");
+
+    savedTask[columnId] = [];
+
+    tasks.forEach((task) => {
+      savedTask[columnId].push({
+        title: task.querySelector("h3").innerText,
+        des: task.querySelector("p").innerText,
+      });
+    });
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(savedTask));
+}
+
+function addTask(title, des, coloumn) {
+  const taskDiv = document.createElement("div");
+  taskDiv.classList.add("task");
+  taskDiv.setAttribute("draggable", "true");
+  taskDiv.innerHTML = `<h3>${title}</h3>
+    <p>${des}</p>
+    <button class="delete-btn">Delete</button>`;
+  coloumn.appendChild(taskDiv);
+  taskDiv.setAttribute("draggable", "true");
+}
+
+function updateTaskCount() {
+  coloumns.forEach((col) => {
+    const taskLength = col.querySelectorAll(".task").length;
+    // console.log(taskLength);
+    const count = col.querySelector(".task-count");
+    if (count) count.textContent = taskLength;
+    return;
+  });
+}
+
 document.addEventListener("dragstart", (e) => {
-  if (!e.target.classList.contains("task")) return
-    dragElement = e.target;
+  if (!e.target.classList.contains("task")) return;
+  dragElement = e.target;
   e.target.classList.add("dragging");
 });
 document.addEventListener("dragend", (e) => {
@@ -32,22 +90,14 @@ coloumns.forEach((coloumn) => {
     // console.log("dropped", dragElement, coloumn);
     coloumn.appendChild(dragElement);
     coloumn.classList.remove("hover");
+    saveAllTasks();
     updateTaskCount();
   });
 });
 
-function updateTaskCount() {
-  coloumns.forEach((col) => {
-    const taskLength = col.querySelectorAll(".task").length;
-    // console.log(taskLength);
-    const count = col.querySelector(".task-count");
-    if (count) count.textContent = taskLength;
-    return;
-  });
-}
-
 addTaskBtn.addEventListener("click", () => {
   modal.classList.add("active");
+  document.getElementById("task-title").focus();
 });
 bgModal.addEventListener("click", () => {
   modal.classList.remove("active");
@@ -58,15 +108,8 @@ sumbitBtn.addEventListener("click", () => {
   const des = document.getElementById("title-des").value.trim();
 
   if (!title || !des) return;
-
-  const taskDiv = document.createElement("div");
-  taskDiv.classList.add("task");
-  taskDiv.setAttribute("draggable", "true");
-  taskDiv.innerHTML = `<h3>${title}</h3>
-    <p>${des}</p>
-    <button class="delete-btn">Delete</button>`;
-
-  todoColoumn.appendChild(taskDiv);
+  addTask(title, des, todoColoumn);
+  saveAllTasks();
 
   modal.classList.remove("active");
   document.getElementById("task-title").value = "";
@@ -79,5 +122,6 @@ document.addEventListener("click", (e) => {
     const task = e.target.closest(".task");
     task.remove();
   }
+  saveAllTasks();
   updateTaskCount();
 });
